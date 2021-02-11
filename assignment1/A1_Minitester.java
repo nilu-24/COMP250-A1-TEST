@@ -844,6 +844,24 @@ class Customer_CheckOutClear implements Runnable {
 	}
 }
 
+class Tax_OnlyOnJam implements Runnable {
+    public void run(){
+        Jam jammy = new Jam("Orange",7,420);
+        Fruit fruity = new Fruit("Pear",500,23);
+        Egg eggy = new Egg("White",100,16);
+        Customer c = new Customer("Nilavro",1000);
+        c.addToBasket(jammy);
+        c.addToBasket(eggy);
+        c.addToBasket(fruity);
+        int tax = c.getBasket().getTotalTax();
+        if(tax != 441){
+            throw new AssertionError("Expected tax to be 441 (Tax ONLY on Jam)");
+        }
+        else System.out.println("Tax_OnlyOnJam test passed.");
+    }
+
+}
+
 public class A1_Minitester {
     // To skip running some tests, just comment them out below.
     static String[] tests = {
@@ -889,7 +907,8 @@ public class A1_Minitester {
 		"assignment1.Basket_Remove2",
 		"assignment1.SeasonalFruit_Equals1",
 		"assignment1.SeasonalFruit_Equals2",
-		"assignment1.Customer_CheckOutClear"
+		"assignment1.Customer_CheckOutClear",
+        "assignment1.Tax_OnlyOnJam"
     };
     
     public static void main(String[] args) {
