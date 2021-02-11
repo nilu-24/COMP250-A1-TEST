@@ -797,6 +797,28 @@ class Basket_Remove_Enhanced implements Runnable {
         System.out.println("Basket enhanced remove tests passed.");
     }
 }
+ 
+class Tax_OnlyOnJam implements Runnable {
+    public void run(){
+        Jam jammy = new Jam("Orange",7,420);
+        Fruit fruity = new Fruit("Pear",500,23);
+        Egg eggy = new Egg("White",100,16);
+        Customer c = new Customer("Nilavro",1000);
+        c.addToBasket(jammy);
+        c.addToBasket(eggy);
+        c.addToBasket(fruity);
+        int tax = c.getBasket().getTotalTax();
+        if(tax != 441){
+            throw new AssertionError("Expected tax to be 441 (Tax ONLY on Jam)");
+        }
+        else System.out.println("Tax_OnlyOnJam test passed.");
+    }
+
+}
+
+
+
+
 
 public class A1_Minitester {
     // To skip running some tests, just comment them out below.
@@ -840,7 +862,8 @@ public class A1_Minitester {
 "assignment1.test_Basket_Jam_toString",
             "assignment1.Jam_Equal1",
 "assignment1.Jam_Equal2",
-            "assignment1.Basket_Remove2"
+            "assignment1.Basket_Remove2",
+	    "assignment1.Tax_OnlyOnJam"
 
     };
     public static void main(String[] args) {
